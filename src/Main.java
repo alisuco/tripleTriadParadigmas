@@ -9,26 +9,33 @@ public class Main {
     public static void main(String[] args) {
 
         List<Cartas> cartas = new ArrayList<>();
- 
-        String caminho = "C:\\Users\\aliso\\OneDrive\\Área de Trabalho\\Faculdade\\paradigmas\\projeto-unidade-1\\src\\tripletriad\\cards.csv";
-        
-        List<String[]> dados = new ArrayList<>();
+
+        String caminho = "src/cards.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
             String conteudo;
+
             br.readLine();
-            br.readLine();
+
             while ((conteudo = br.readLine()) != null) {
-                String[] valores = conteudo.split(";");
-                dados.add(valores); 
+
+                String[] valores = conteudo.split(",");
+
+                if(valores.length==4) {
+                    Integer cima = Integer.parseInt(valores[0].replaceAll("[^0-9]", ""));
+                    Integer esquerda = Integer.parseInt(valores[1].replaceAll("[^0-9]", ""));
+                    Integer baixo = Integer.parseInt(valores[2].replaceAll("[^0-9]", ""));
+                    Integer direita = Integer.parseInt(valores[3].replaceAll("[^0-9]", ""));
+                    cartas.add(new Cartas(cima, esquerda, baixo, direita));
+                }
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
-        for (String[] c : dados) {
-            cartas.add(new Cartas("conteudo", Integer.parseInt(c[0]), Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3])));
+        for (Cartas x: cartas) {
+            System.out.println(x);
         }
-      
+
     }
 }
