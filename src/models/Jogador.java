@@ -21,26 +21,68 @@ public class Jogador {
     }
 
     public void mostrarCartas() {
-        
-        char[] vf = new char[20];
+        int[] valores = new int[4];
+        char[] valoresFormatados = new char[20];
         int cont = 0, tam = cartas.size();
         for (Carta c : cartas) {
-            int[] valores = {c.getCima(), c.getEsquerda(), c.getDireita(), c.getBaixo()};
+            valores[0] = c.getCima();
+            valores[1] = c.getEsquerda();
+            valores[2] = c.getDireita();
+            valores[0] = c.getBaixo();
             for (int i = 0; i < valores.length; i++) {
                 if (valores[i] == 10) {
-                    vf[cont] = 'A';
+                    valoresFormatados[cont] = 'A';
                 } else {
-                    vf[cont] = Integer.toString(valores[i]).charAt(0);
+                    valoresFormatados[cont] = Integer.toString(valores[i]).charAt(0);
                 }
                 cont++;
             }
         }
 
-        System.out.println("\n+-----+ +-----+ +-----+ +-----+ +-----+\n" +
-                            "|  " + vf[0] + "  | |  " + vf[4] + "  | |  " + vf[8] + "  | |  " + vf[12] + "  | |  " + vf[16] + "  |\n" +
-                            "|"+ vf[1] + "   " + vf[2] + "| |"+ vf[5] + "   " + vf[6] + "| |"+ vf[9] + "   " + vf[10] + "| |"+ vf[13] + "   " + vf[14] + "| |"+ vf[17] + "   " + vf[18] + "|\n" +
-                            "|  " + vf[3] + "  | |  " + vf[7] + "  | |  " + vf[11] + "  | |  " + vf[15] + "  | |  " + vf[19] + "  |\n" +
-                            "+-----+ +-----+ +-----+ +-----+ +-----+\n");
+        switch (tam) {
+            case 5:
+                System.out.println("\n+-----+ +-----+ +-----+ +-----+ +-----+\n" +
+                "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  | |  " + valoresFormatados[8] + "  | |  " + valoresFormatados[12] + "  | |  " + valoresFormatados[16] + "  |\n" +
+                "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "| |"+ valoresFormatados[9] + "   " + valoresFormatados[10] + "| |"+ valoresFormatados[13] + "   " + valoresFormatados[14] + "| |"+ valoresFormatados[17] + "   " + valoresFormatados[18] + "|\n" +
+                "|  " + valoresFormatados[3] + "  | |  " + valoresFormatados[7] + "  | |  " + valoresFormatados[11] + "  | |  " + valoresFormatados[15] + "  | |  " + valoresFormatados[19] + "  |\n" +
+                "+-----+ +-----+ +-----+ +-----+ +-----+\n");
+                break;
+        
+            case 4:
+                System.out.println("\n+-----+ +-----+ +-----+ +-----+\n" +
+                "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  | |  " + valoresFormatados[8] + "  | |  " + valoresFormatados[12] + "  |\n" +
+                "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "| |"+ valoresFormatados[9] + "   " + valoresFormatados[10] + "| |"+ valoresFormatados[13] + "   " + valoresFormatados[14] + "|\n" +
+                "|  " + valoresFormatados[3] + "  | |  " + valoresFormatados[7] + "  | |  " + valoresFormatados[11] + "  | |  " + valoresFormatados[15] + "  |\n" +
+                "+-----+ +-----+ +-----+ +-----+\n");    
+                break;
+        
+            case 3:
+                System.out.println("\n+-----+ +-----+ +-----+\n" +
+                "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  | |  " + valoresFormatados[8] + "  |\n" +
+                "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "| |"+ valoresFormatados[9] + "   " + valoresFormatados[10] + "|\n" +
+                "|  " + valoresFormatados[3] + "  | |  " + valoresFormatados[7] + "  | |  " + valoresFormatados[11] + "  |\n" +
+                "+-----+ +-----+ +-----+\n"); 
+                break;
+        
+            case 2:
+                System.out.println("\n+-----+ +-----+\n" +
+                "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  |\n" +
+                "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "|\n" +
+                "|  " + valoresFormatados[3] + "  | |  " + valoresFormatados[7] + "  |\n" +
+                "+-----+ +-----+\n");
+                break;
+        
+            case 1:
+                System.out.println("\n+-----+\n" +
+                "|  " + valoresFormatados[0] + "  |\n" +
+                "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "|\n" +
+                "|  " + valoresFormatados[3] + "  |\n" +
+                "+-----+\n");
+                break;
+        
+            default:
+                break;
+        }
 
     }
 }
