@@ -34,4 +34,21 @@ public class Carta {
                "|  " + valoresFormatados[3] + "  |\n" +
                "+-----+";
     }
+
+    public int getCima() {
+        return cima;
+    }
+
+    public int getEsquerda() {
+        return esquerda;
+    }
+
+    public int getBaixo() {
+        return baixo;
+    }
+
+    public int getDireita() {
+        return direita;
+    }
+    
 }
