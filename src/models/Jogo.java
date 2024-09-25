@@ -34,7 +34,7 @@ public final class Jogo {
         while (tabuleiro.getQuantCartasJogadas() < 9) {
             System.out.println();
 
-            if (jogadorDaVez % 2 == 0) {
+            if (jogadorDaVez % 2 != 0) {
                 System.out.println("----- Jogador 1 -----");
                 tabuleiro.mostrarTabuleiro();
 
@@ -66,7 +66,7 @@ public final class Jogo {
                 }
             }
 
-            if (jogadorDaVez % 2 != 0) {
+            if (jogadorDaVez % 2 == 0) {
                 System.out.println("----- Jogador 2 -----");
                 tabuleiro.mostrarTabuleiro();
 

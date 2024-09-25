@@ -28,7 +28,7 @@ public class Jogador {
             valores[0] = c.getCima();
             valores[1] = c.getEsquerda();
             valores[2] = c.getDireita();
-            valores[0] = c.getBaixo();
+            valores[3] = c.getBaixo();
 
             for (int i = 0; i < valores.length; i++) {
                 if (valores[i] == 10) {
@@ -39,7 +39,7 @@ public class Jogador {
                 cont++;
             }
         }
-
+//#region CARTAS ASCII
         switch (tam) {
             case 5:
                 System.out.println("\n+-----+ +-----+ +-----+ +-----+ +-----+\n" +
@@ -84,7 +84,7 @@ public class Jogador {
             default:
                 break;
         }
-
+//#endregion
     }
 
     public Carta jogarCarta(int index) throws Exception {
