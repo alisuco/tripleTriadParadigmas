@@ -1,5 +1,11 @@
 package models;
 
+// "\n+-----+ +-----+ +-----+ +-----+ +-----+\n" +
+// "|     | |     | |     | |     | |     |\n" +
+// "|     | |     | |     | |     | |     |\n" +
+// "|     | |     | |     | |     | |     |\n" +
+// "+-----+ +-----+ +-----+ +-----+ +-----+\n";
+
 public final class Tabuleiro {
     private Carta[][] matriz;
     private int quantCartasJogadas;
@@ -87,8 +93,59 @@ public final class Tabuleiro {
         return 0;
     }
 
+    public String numCima(int i, int j) {
+        if (matriz[i][j] == null) {
+            return "     ";
+        }
+        return this.matriz[i][j].getCima() == 10 ? "  A  " : "  " + Integer.toString(matriz[i][j].getCima())+ "  ";
+    }
+
+    public String numMeio(int i, int j) {
+        String auxEsq = "";
+        String auxDir = "";
+
+        if (matriz[i][j] == null) {
+            return "     ";
+        }
+        if (matriz[i][j].getEsquerda() == 10) {
+            auxEsq = "A";
+        }else{
+            auxEsq = Integer.toString(matriz[i][j].getEsquerda());
+        }
+        if (matriz[i][j].getDireita() == 10) {
+            auxDir = "A";
+        }else{
+            auxDir = Integer.toString(matriz[i][j].getDireita());
+        }
+        
+        return auxEsq + "   " + auxDir;
+    }
+
+    public String numBaixo(int i, int j) {
+        if (matriz[i][j] == null) {
+            return "     ";
+        }
+        return this.matriz[i][j].getBaixo() == 10 ? "  A  " : "  " + Integer.toString(matriz[i][j].getBaixo())+ "  ";
+    }
+
     public void mostrarTabuleiro() {
-        System.out.println("Mostrando tabuleiro...");
+        System.out.println("\n\n----- TABULEIRO -----");
+
+        System.out.println("\n+-----+  +-----+  +-----+\n" +
+                            "|"+numCima(0,0)+"|  |"+numCima(0,1)+"|  |"+numCima(0,2)+"|\n" +
+                            "|"+numMeio(0, 0)+"|  |"+numMeio(0, 1)+"|  |"+numMeio(0, 2)+"|\n" +
+                            "|"+numBaixo(0, 0)+"|  |"+numBaixo(0, 1)+"|  |"+numBaixo(0, 2)+"|\n" +
+                            "+-----+  +-----+  +-----+\n" +
+                            "+-----+  +-----+  +-----+\n" +
+                            "|"+numCima(1,0)+"|  |"+numCima(1,1)+"|  |"+numCima(1,2)+"|\n" +
+                            "|"+numMeio(1, 0)+"|  |"+numMeio(1, 1)+"|  |"+numMeio(1, 2)+"|\n" +
+                            "|"+numBaixo(1, 0)+"|  |"+numBaixo(1, 1)+"|  |"+numBaixo(1, 2)+"|\n" +
+                            "+-----+  +-----+  +-----+\n" +
+                            "+-----+  +-----+  +-----+\n" +
+                            "|"+numCima(2,0)+"|  |"+numCima(2,1)+"|  |"+numCima(2,2)+"|\n" +
+                            "|"+numMeio(2, 0)+"|  |"+numMeio(2, 1)+"|  |"+numMeio(2, 2)+"|\n" +
+                            "|"+numBaixo(2, 0)+"|  |"+numBaixo(2, 1)+"|  |"+numBaixo(2, 2)+"|\n" +
+                            "+-----+  +-----+  +-----+\n");
     }
 
     public int getQuantCartasJogadas() {

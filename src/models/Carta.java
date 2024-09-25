@@ -15,25 +15,6 @@ public class Carta {
         this.dono = dono;
     }
 
-    @Override
-    public String toString() {
-        int[] valores = {cima, esquerda, direita, baixo};
-        char[] valoresFormatados = new char[4];
-
-        for (int i = 0; i < valores.length; i++) {
-            if (valores[i] == 10) {
-                valoresFormatados[i] = 'A';
-            } else {
-                valoresFormatados[i] = Integer.toString(valores[i]).charAt(0);
-            }
-        }
-
-        return "+-----+\n" +
-               "|  " + valoresFormatados[0] + "  |\n" +
-               "|" + valoresFormatados[1] + "   " + valoresFormatados[2] + "|\n" +
-               "|  " + valoresFormatados[3] + "  |\n" +
-               "+-----+";
-    }
 
     public int getCima() {
         return cima;

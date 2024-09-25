@@ -20,7 +20,7 @@ public final class Jogo {
     private int sortearJogador() {
         System.out.println("Sorteando jogador que iniciará o jogo...");
 
-        int numSorteado = random.nextInt(2) + 1;
+        int numSorteado = random.nextInt(1,3);
 
         System.out.println("O jogador " + numSorteado + " foi sorteado");
 
