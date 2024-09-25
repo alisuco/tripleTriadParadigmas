@@ -5,14 +5,14 @@ public class Carta {
     private int esquerda;
     private int baixo;
     private int direita;
+    private Jogador dono;
 
-    public Carta() {}
-
-    public Carta(int cima, int esquerda, int baixo, int direita) {
+    public Carta(int cima, int esquerda, int baixo, int direita, Jogador dono) {
         this.cima = cima;
         this.esquerda = esquerda;
         this.baixo = baixo;
         this.direita = direita;
+        this.dono = dono;
     }
 
     @Override
@@ -50,5 +50,12 @@ public class Carta {
     public int getDireita() {
         return direita;
     }
+
+    public void setDono(Jogador dono) {
+        this.dono = dono;
+    }
     
+    public Jogador getDono() {
+        return dono;
+    }
 }

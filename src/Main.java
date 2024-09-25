@@ -1,11 +1,15 @@
 import models.Jogador;
+import models.Jogo;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world");
+        System.out.println();
 
-        Jogador jogador = new Jogador();
+        Jogador jogador1 = new Jogador();
+        Jogador jogador2 = new Jogador();
 
-        jogador.mostrarCartas();
+        Jogo jogo = new Jogo(jogador1, jogador2);
+
+        jogo.iniciarJogo();
     }
 }
