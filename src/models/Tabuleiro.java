@@ -9,6 +9,9 @@ package models;
 public final class Tabuleiro {
     private Carta[][] matriz;
     private int quantCartasJogadas;
+    static String red = "\u001b[31m";
+    static String blue = "\u001b[34m";
+    static String reset = "\u001b[0m";
 
     public Tabuleiro() {
         matriz = new Carta[3][3];
@@ -128,24 +131,50 @@ public final class Tabuleiro {
         return this.matriz[i][j].getBaixo() == 10 ? "  A  " : "  " + Integer.toString(matriz[i][j].getBaixo())+ "  ";
     }
 
+    private String cor(int i, int j) {
+        if (matriz[i][j] == null) {
+            return reset;
+        } else {
+            if (matriz[i][j].getDono().getNome().equals("Jogador1") ) {
+                return blue;
+            } else {
+                return red;
+            }
+        }
+    }
+
     public void mostrarTabuleiro() {
         System.out.println("\n\n----- TABULEIRO -----");
 
-        System.out.println("\n+-----+  +-----+  +-----+\n" +
-                            "|"+numCima(0,0)+"|  |"+numCima(0,1)+"|  |"+numCima(0,2)+"|\n" +
-                            "|"+numMeio(0, 0)+"|  |"+numMeio(0, 1)+"|  |"+numMeio(0, 2)+"|\n" +
-                            "|"+numBaixo(0, 0)+"|  |"+numBaixo(0, 1)+"|  |"+numBaixo(0, 2)+"|\n" +
-                            "+-----+  +-----+  +-----+\n" +
-                            "+-----+  +-----+  +-----+\n" +
-                            "|"+numCima(1,0)+"|  |"+numCima(1,1)+"|  |"+numCima(1,2)+"|\n" +
-                            "|"+numMeio(1, 0)+"|  |"+numMeio(1, 1)+"|  |"+numMeio(1, 2)+"|\n" +
-                            "|"+numBaixo(1, 0)+"|  |"+numBaixo(1, 1)+"|  |"+numBaixo(1, 2)+"|\n" +
-                            "+-----+  +-----+  +-----+\n" +
-                            "+-----+  +-----+  +-----+\n" +
-                            "|"+numCima(2,0)+"|  |"+numCima(2,1)+"|  |"+numCima(2,2)+"|\n" +
-                            "|"+numMeio(2, 0)+"|  |"+numMeio(2, 1)+"|  |"+numMeio(2, 2)+"|\n" +
-                            "|"+numBaixo(2, 0)+"|  |"+numBaixo(2, 1)+"|  |"+numBaixo(2, 2)+"|\n" +
-                            "+-----+  +-----+  +-----+\n");
+        System.out.println("\n"+cor(0, 0)+"+-----+ "+cor(0, 1)+" +-----+ "+cor(0, 2)+" +-----+\n" +
+
+                            ""+cor(0, 0)+"|"+numCima(0,0)+"| "+cor(0, 1)+" |"+numCima(0,1)+"| "+cor(0, 2)+" |"+numCima(0,2)+"|\n" +
+
+                            ""+cor(0, 0)+"|"+numMeio(0, 0)+"| "+cor(0, 1)+" |"+numMeio(0, 1)+"| "+cor(0, 2)+" |"+numMeio(0, 2)+"|\n" +
+
+                            ""+cor(0, 0)+"|"+numBaixo(0, 0)+"| "+cor(0, 1)+" |"+numBaixo(0, 1)+"| "+cor(0, 2)+" |"+numBaixo(0, 2)+"|\n" +
+
+                            ""+cor(0, 0)+"+-----+ "+cor(0, 1)+" +-----+ "+cor(0, 2)+" +-----+\n" +
+
+                            ""+cor(1, 0)+"+-----+ "+cor(1, 1)+" +-----+ "+cor(1, 2)+" +-----+\n" +
+
+                            ""+cor(1, 0)+"|"+numCima(1,0)+"| "+cor(1, 1)+" |"+numCima(1,1)+"| "+cor(1, 2)+" |"+numCima(1,2)+"|\n" +
+
+                            ""+cor(1, 0)+"|"+numMeio(1, 0)+"| "+cor(1, 1)+" |"+numMeio(1, 1)+"| "+cor(1, 2)+" |"+numMeio(1, 2)+"|\n" +
+
+                            ""+cor(1, 0)+"|"+numBaixo(1, 0)+"| "+cor(1, 1)+" |"+numBaixo(1, 1)+"| "+cor(1, 2)+" |"+numBaixo(1, 2)+"|\n" +
+
+                            ""+cor(1, 0)+"+-----+ "+cor(1, 1)+" +-----+ "+cor(1, 2)+" +-----+\n" +
+
+                            ""+cor(2, 0)+"+-----+ "+cor(2, 1)+" +-----+ "+cor(2, 2)+" +-----+\n" +
+
+                            ""+cor(2, 0)+"|"+numCima(2,0)+"| "+cor(2, 1)+" |"+numCima(2,1)+"| "+cor(2, 2)+" |"+numCima(2,2)+"|\n" +
+
+                            ""+cor(2, 0)+"|"+numMeio(2, 0)+"| "+cor(2, 1)+" |"+numMeio(2, 1)+"| "+cor(2, 2)+" |"+numMeio(2, 2)+"|\n" +
+
+                            ""+cor(2, 0)+"|"+numBaixo(2, 0)+"| "+cor(2, 1)+" |"+numBaixo(2, 1)+"| "+cor(2, 2)+" |"+numBaixo(2, 2)+"|\n" +
+
+                            ""+cor(2, 0)+"+-----+ "+cor(2, 1)+" +-----+ "+cor(2, 2)+" +-----+\n" + reset);
     }
 
     public int getQuantCartasJogadas() {
