@@ -33,10 +33,15 @@ public final class Jogo {
 
         while (tabuleiro.getQuantCartasJogadas() < 9) {
             System.out.println();
+            tabuleiro.mostrarTabuleiro();
+
+            System.out.println();
+            System.out.println("----- Pontução -----");
+            System.out.println("Jogador 1 - " + jogador1.getPontos() + " pontos");
+            System.out.println("Jogador 2 - " + jogador2.getPontos() + " pontos");
 
             if (jogadorDaVez % 2 != 0) {
                 System.out.println("----- Jogador 1 -----");
-                tabuleiro.mostrarTabuleiro();
 
                 System.out.println("Suas cartas:");
                 jogador1.mostrarCartas();
@@ -68,7 +73,6 @@ public final class Jogo {
 
             if (jogadorDaVez % 2 == 0) {
                 System.out.println("----- Jogador 2 -----");
-                tabuleiro.mostrarTabuleiro();
 
                 System.out.println("Suas cartas:");
                 jogador2.mostrarCartas();
@@ -106,8 +110,11 @@ public final class Jogo {
             jogadorDaVez++;
         }
 
+        tabuleiro.mostrarTabuleiro();
+
         System.out.println("O jogo acabou");
-        System.out.println("Pontução:");
+        System.out.println();
+        System.out.println("----- Pontução -----");
         System.out.println("Jogador 1 - " + jogador1.getPontos() + " pontos");
         System.out.println("Jogador 2 - " + jogador2.getPontos() + " pontos");
         System.out.println();

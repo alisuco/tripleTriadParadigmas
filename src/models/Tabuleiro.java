@@ -9,9 +9,10 @@ package models;
 public final class Tabuleiro {
     private Carta[][] matriz;
     private int quantCartasJogadas;
-    static String red = "\u001b[31m";
-    static String blue = "\u001b[34m";
-    static String reset = "\u001b[0m";
+
+    private static String red = "\u001b[31m";
+    private static String blue = "\u001b[34m";
+    private static String reset = "\u001b[0m";
 
     public Tabuleiro() {
         matriz = new Carta[3][3];
@@ -32,16 +33,23 @@ public final class Tabuleiro {
 
         int quantPontosFeitos = 0;
 
+        quantPontosFeitos += this.checarPlus(i, j, carta);
+
         quantPontosFeitos += this.checarEsquerda(i, j, carta);
         quantPontosFeitos += this.checarDireita(i, j, carta);
         quantPontosFeitos += this.checarCima(i, j, carta);
         quantPontosFeitos += this.checarBaixo(i, j, carta);
 
+
         return quantPontosFeitos;
     }
 
     private int checarEsquerda(int i, int j, Carta carta) {
-        if (j == 0 || matriz[i][j-1] == null) {
+        if (
+            j == 0 ||
+            matriz[i][j-1] == null ||
+            matriz[i][j-1].getDono().equals(carta.getDono())
+        ) {
             return 0;
         }
 
@@ -55,7 +63,11 @@ public final class Tabuleiro {
     }
 
     private int checarDireita(int i, int j, Carta carta) {
-        if (j == 2 || matriz[i][j+1] == null) {
+        if (
+            j == 2 ||
+            matriz[i][j+1] == null ||
+            matriz[i][j+1].getDono().equals(carta.getDono())
+        ) {
             return 0;
         }
 
@@ -69,7 +81,11 @@ public final class Tabuleiro {
     }
 
     private int checarCima(int i, int j, Carta carta) {
-        if (i == 0 || matriz[i-1][j] == null) {
+        if (
+            i == 0 ||
+            matriz[i-1][j] == null ||
+            matriz[i-1][j].getDono().equals(carta.getDono())
+        ) {
             return 0;
         }
 
@@ -83,7 +99,11 @@ public final class Tabuleiro {
     }
 
     private int checarBaixo(int i, int j, Carta carta) {
-        if (i == 2 || matriz[i+1][j] == null) {
+        if (
+            i == 2 ||
+            matriz[i+1][j] == null ||
+            matriz[i+1][j].getDono().equals(carta.getDono())
+        ) {
             return 0;
         }
 
@@ -96,14 +116,110 @@ public final class Tabuleiro {
         return 0;
     }
 
-    public String numCima(int i, int j) {
+    private int checarPlus(int i, int j, Carta carta) {
+        int valorCima, valorBaixo, valorDireita, valorEsquerda, quantPontosFeitos = 0;
+
+        valorCima = this.somaCima(i, j, carta);
+        valorEsquerda = this.somaEsquerda(i, j, carta);
+        valorBaixo = this.somaBaixo(i, j, carta);
+        valorDireita = this.somaDireita(i, j, carta);
+
+        int[] somasDeTodosLados = {valorCima, valorEsquerda, valorBaixo, valorDireita};
+
+        for (int k = 0; k < somasDeTodosLados.length - 1; k++) {
+            for (int w = k + 1; w < somasDeTodosLados.length; w++) {
+                if (
+                    somasDeTodosLados[k] + somasDeTodosLados[w] >= 0 &&
+                    somasDeTodosLados[k] == somasDeTodosLados[w]
+                ) {
+                    System.out.println("PLUS!!!");
+
+                    switch (k) {
+                        case 0:
+                            matriz[i-1][j].setDono(carta.getDono());
+                            quantPontosFeitos++;
+
+                            break;
+                    
+                        case 1:
+                            matriz[i][j-1].setDono(carta.getDono());
+                            quantPontosFeitos++;
+
+                            break;
+
+                        case 2:
+                            matriz[i+1][j].setDono(carta.getDono());
+                            quantPontosFeitos++;
+
+                            break;
+                    }
+
+                    switch (w) {
+                        case 1:
+                            matriz[i][j-1].setDono(carta.getDono());
+                            quantPontosFeitos++;
+
+                            break;
+
+                        case 2:
+                            matriz[i+1][j].setDono(carta.getDono());
+                            quantPontosFeitos++;
+
+                            break;
+
+                        case 3:
+                            matriz[i][j+1].setDono(carta.getDono());
+                            quantPontosFeitos++;
+
+                            break;
+                    }
+                }
+            }
+        }
+    
+        return quantPontosFeitos;
+    }
+
+    private int somaCima(int i, int j, Carta carta) {
+        if (i == 0 || matriz[i-1][j] == null) {
+            return -1;
+        }
+
+        return matriz[i][j].getCima() + matriz[i-1][j].getBaixo();
+    }
+    
+    private int somaBaixo(int i, int j, Carta carta) {
+        if (i == 2 || matriz[i+1][j] == null) {
+            return -1;
+        }
+
+        return matriz[i][j].getBaixo() + matriz[i+1][j].getCima();
+    }
+
+    private int somaEsquerda(int i, int j, Carta carta) {
+        if (j == 0 || matriz[i][j-1] == null) {
+            return -1;
+        }
+
+        return matriz[i][j].getEsquerda() + matriz[i][j-1].getDireita();
+    }
+
+    private int somaDireita(int i, int j, Carta carta) {
+        if (j == 2 || matriz[i][j+1] == null) {
+            return -1;
+        }
+
+        return matriz[i][j].getDireita() + matriz[i][j+1].getEsquerda();
+    }
+
+    private String numCima(int i, int j) {
         if (matriz[i][j] == null) {
             return "     ";
         }
         return this.matriz[i][j].getCima() == 10 ? "  A  " : "  " + Integer.toString(matriz[i][j].getCima())+ "  ";
     }
 
-    public String numMeio(int i, int j) {
+    private String numMeio(int i, int j) {
         String auxEsq = "";
         String auxDir = "";
 
@@ -124,7 +240,7 @@ public final class Tabuleiro {
         return auxEsq + "   " + auxDir;
     }
 
-    public String numBaixo(int i, int j) {
+    private String numBaixo(int i, int j) {
         if (matriz[i][j] == null) {
             return "     ";
         }
