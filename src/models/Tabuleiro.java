@@ -13,10 +13,21 @@ public final class Tabuleiro {
     private static String red = "\u001b[31m";
     private static String blue = "\u001b[34m";
     private static String reset = "\u001b[0m";
+    private static String white = "\u001b[37;1m";
 
     public Tabuleiro() {
         matriz = new Carta[3][3];
         quantCartasJogadas = 0;
+    }
+
+    public void testeAddCarta(int i, int j) throws Exception {
+        if (i > 2 || i < 0 || j > 2 || j < 0) {
+            throw new Exception("Célula inválida");
+        }
+
+        if (matriz[i][j] != null) {
+            throw new Exception("Célula já preenchida");
+        }
     }
 
     public int addCarta(int i, int j, Carta carta) throws Exception {
@@ -260,37 +271,40 @@ public final class Tabuleiro {
     }
 
     public void mostrarTabuleiro() {
-        System.out.println("\n\n----- TABULEIRO -----");
+        System.out.println( white + "  _____     _     ___   _   _   _      ___   ___   ___    ___  \r\n" + //
+                        " |_   _|   /_\\   | _ ) | | | | | |    | __| |_ _| | _ \\  / _ \\ \r\n" + //
+                        "   | |    / _ \\  | _ \\ | |_| | | |__  | _|   | |  |   / | (_) |\r\n" + //
+                        "   |_|   /_/ \\_\\ |___/  \\___/  |____| |___| |___| |_|_\\  \\___/ ");
 
-        System.out.println("\n"+cor(0, 0)+"+-----+ "+cor(0, 1)+" +-----+ "+cor(0, 2)+" +-----+\n" +
+        System.out.println("\n"+cor(0, 0)+"                    +-----+ "+cor(0, 1)+" +-----+ "+cor(0, 2)+" +-----+\n" +
 
-                            ""+cor(0, 0)+"|"+numCima(0,0)+"| "+cor(0, 1)+" |"+numCima(0,1)+"| "+cor(0, 2)+" |"+numCima(0,2)+"|\n" +
+                            "                    "+cor(0, 0)+"|"+numCima(0,0)+"| "+cor(0, 1)+" |"+numCima(0,1)+"| "+cor(0, 2)+" |"+numCima(0,2)+"|\n" +
 
-                            ""+cor(0, 0)+"|"+numMeio(0, 0)+"| "+cor(0, 1)+" |"+numMeio(0, 1)+"| "+cor(0, 2)+" |"+numMeio(0, 2)+"|\n" +
+                            "                    "+cor(0, 0)+"|"+numMeio(0, 0)+"| "+cor(0, 1)+" |"+numMeio(0, 1)+"| "+cor(0, 2)+" |"+numMeio(0, 2)+"|\n" +
 
-                            ""+cor(0, 0)+"|"+numBaixo(0, 0)+"| "+cor(0, 1)+" |"+numBaixo(0, 1)+"| "+cor(0, 2)+" |"+numBaixo(0, 2)+"|\n" +
+                            "                    "+cor(0, 0)+"|"+numBaixo(0, 0)+"| "+cor(0, 1)+" |"+numBaixo(0, 1)+"| "+cor(0, 2)+" |"+numBaixo(0, 2)+"|\n" +
 
-                            ""+cor(0, 0)+"+-----+ "+cor(0, 1)+" +-----+ "+cor(0, 2)+" +-----+\n" +
+                            "                    "+cor(0, 0)+"+-----+ "+cor(0, 1)+" +-----+ "+cor(0, 2)+" +-----+\n" +
 
-                            ""+cor(1, 0)+"+-----+ "+cor(1, 1)+" +-----+ "+cor(1, 2)+" +-----+\n" +
+                            "                    "+cor(1, 0)+"+-----+ "+cor(1, 1)+" +-----+ "+cor(1, 2)+" +-----+\n" +
 
-                            ""+cor(1, 0)+"|"+numCima(1,0)+"| "+cor(1, 1)+" |"+numCima(1,1)+"| "+cor(1, 2)+" |"+numCima(1,2)+"|\n" +
+                            "                    "+cor(1, 0)+"|"+numCima(1,0)+"| "+cor(1, 1)+" |"+numCima(1,1)+"| "+cor(1, 2)+" |"+numCima(1,2)+"|\n" +
 
-                            ""+cor(1, 0)+"|"+numMeio(1, 0)+"| "+cor(1, 1)+" |"+numMeio(1, 1)+"| "+cor(1, 2)+" |"+numMeio(1, 2)+"|\n" +
+                            "                    "+cor(1, 0)+"|"+numMeio(1, 0)+"| "+cor(1, 1)+" |"+numMeio(1, 1)+"| "+cor(1, 2)+" |"+numMeio(1, 2)+"|\n" +
 
-                            ""+cor(1, 0)+"|"+numBaixo(1, 0)+"| "+cor(1, 1)+" |"+numBaixo(1, 1)+"| "+cor(1, 2)+" |"+numBaixo(1, 2)+"|\n" +
+                            "                    "+cor(1, 0)+"|"+numBaixo(1, 0)+"| "+cor(1, 1)+" |"+numBaixo(1, 1)+"| "+cor(1, 2)+" |"+numBaixo(1, 2)+"|\n" +
 
-                            ""+cor(1, 0)+"+-----+ "+cor(1, 1)+" +-----+ "+cor(1, 2)+" +-----+\n" +
+                            "                    "+cor(1, 0)+"+-----+ "+cor(1, 1)+" +-----+ "+cor(1, 2)+" +-----+\n" +
 
-                            ""+cor(2, 0)+"+-----+ "+cor(2, 1)+" +-----+ "+cor(2, 2)+" +-----+\n" +
+                            "                    "+cor(2, 0)+"+-----+ "+cor(2, 1)+" +-----+ "+cor(2, 2)+" +-----+\n" +
 
-                            ""+cor(2, 0)+"|"+numCima(2,0)+"| "+cor(2, 1)+" |"+numCima(2,1)+"| "+cor(2, 2)+" |"+numCima(2,2)+"|\n" +
+                            "                    "+cor(2, 0)+"|"+numCima(2,0)+"| "+cor(2, 1)+" |"+numCima(2,1)+"| "+cor(2, 2)+" |"+numCima(2,2)+"|\n" +
 
-                            ""+cor(2, 0)+"|"+numMeio(2, 0)+"| "+cor(2, 1)+" |"+numMeio(2, 1)+"| "+cor(2, 2)+" |"+numMeio(2, 2)+"|\n" +
+                            "                    "+cor(2, 0)+"|"+numMeio(2, 0)+"| "+cor(2, 1)+" |"+numMeio(2, 1)+"| "+cor(2, 2)+" |"+numMeio(2, 2)+"|\n" +
 
-                            ""+cor(2, 0)+"|"+numBaixo(2, 0)+"| "+cor(2, 1)+" |"+numBaixo(2, 1)+"| "+cor(2, 2)+" |"+numBaixo(2, 2)+"|\n" +
+                            "                    "+cor(2, 0)+"|"+numBaixo(2, 0)+"| "+cor(2, 1)+" |"+numBaixo(2, 1)+"| "+cor(2, 2)+" |"+numBaixo(2, 2)+"|\n" +
 
-                            ""+cor(2, 0)+"+-----+ "+cor(2, 1)+" +-----+ "+cor(2, 2)+" +-----+\n" + reset);
+                            "                    "+cor(2, 0)+"+-----+ "+cor(2, 1)+" +-----+ "+cor(2, 2)+" +-----+\n" + reset);
     }
 
     public int getQuantCartasJogadas() {

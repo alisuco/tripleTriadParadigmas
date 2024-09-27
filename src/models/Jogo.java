@@ -8,6 +8,9 @@ public final class Jogo {
     private Jogador jogador2;
     private Tabuleiro tabuleiro;
 
+    private static String reset = "\u001b[0m";
+    private static String white = "\u001b[37;1m";
+
     private Random random = new Random();
     private Scanner scann = new Scanner(System.in);
 
@@ -29,76 +32,91 @@ public final class Jogo {
 
     public void iniciarJogo() {
         int jogadorDaVez = this.sortearJogador();
-        int index, i, j, quantPontosFeitos;
+        int index, i, j, quantPontosFeitos, controle;
 
         while (tabuleiro.getQuantCartasJogadas() < 9) {
+            controle = 0;
             System.out.println();
             tabuleiro.mostrarTabuleiro();
 
             System.out.println();
-            System.out.println("----- Pontução -----");
-            System.out.println("Jogador 1 - " + jogador1.getPontos() + " pontos");
-            System.out.println("Jogador 2 - " + jogador2.getPontos() + " pontos");
-
+            System.out.println("                      "+white+"----- Pontução -----"+reset);
+            System.out.println("\t\t       Jogador 1: "+white+ jogador1.getPontos() + " pontos"+reset);
+            System.out.println("\t\t       Jogador 2: "+white+ jogador2.getPontos() + " pontos\n\n"+reset);
+            
             if (jogadorDaVez % 2 != 0) {
-                System.out.println("----- Jogador 1 -----");
+                while (controle == 0) { 
+                       
+                    System.out.println("----- Jogador 1 -----");
 
-                System.out.println("Suas cartas:");
-                jogador1.mostrarCartas();
+                    System.out.println("Suas cartas:");
+                    jogador1.mostrarCartas();
 
-                System.out.print(
-                    "\nEscolha a posição da carta que deseja jogar (de 1 a " + jogador1.getQuantCartas() + "): "
-                );
-                index = scann.nextInt();
+                    System.out.print(
+                        "\nEscolha a posição da carta que deseja jogar (de 1 a " + jogador1.getQuantCartas() + "): "
+                    );
+                    index = scann.nextInt();
 
-                System.out.print(
-                    "\nEscolha a linha do tabuleiro que deseja jogar a carta (de 1 a 3): "
-                );
-                i = scann.nextInt();
+                    System.out.print(
+                        "\nEscolha a linha do tabuleiro que deseja jogar a carta (de 1 a 3): "
+                    );
+                    i = scann.nextInt();
 
-                System.out.print(
-                "\nEscolha a coluna do tabuleiro que deseja jogar a carta (de 1 a 3): "
-                );
-                j = scann.nextInt();
+                    System.out.print(
+                    "\nEscolha a coluna do tabuleiro que deseja jogar a carta (de 1 a 3): "
+                    );
+                    j = scann.nextInt();
 
-                try {
-                    quantPontosFeitos = tabuleiro.addCarta(i-1, j-1, jogador1.jogarCarta(index-1));
+                    try {
 
-                    jogador1.setPontos(quantPontosFeitos);
-                    jogador2.setPontos(quantPontosFeitos * (-1));
-                } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                        tabuleiro.testeAddCarta(i-1, j-1);
+                        quantPontosFeitos = tabuleiro.addCarta(i-1, j-1, jogador1.jogarCarta(index-1));
+                        jogador1.setPontos(quantPontosFeitos);
+                        jogador2.setPontos(quantPontosFeitos * (-1));
+                        controle++;    
+
+                    } catch (Exception e) {
+                        System.out.println("Erro: " + e.getMessage());
+                        tabuleiro.mostrarTabuleiro();
+                    }
                 }
             }
 
             if (jogadorDaVez % 2 == 0) {
-                System.out.println("----- Jogador 2 -----");
+                while (controle == 0) { 
+                                    
+                    System.out.println("----- Jogador 2 -----");
 
-                System.out.println("Suas cartas:");
-                jogador2.mostrarCartas();
+                    System.out.println("Suas cartas:");
+                    jogador2.mostrarCartas();
 
-                System.out.print(
-                    "\nEscolha a posição da carta que deseja jogar (de 1 a " + jogador2.getQuantCartas() + "): "
-                );
-                index = scann.nextInt();
+                    System.out.print(
+                        "\nEscolha a posição da carta que deseja jogar (de 1 a " + jogador2.getQuantCartas() + "): "
+                    );
+                    index = scann.nextInt();
 
-                System.out.print(
-                    "\nEscolha a linha do tabuleiro que deseja jogar a carta (de 1 a 3): "
-                );
-                i = scann.nextInt();
+                    System.out.print(
+                        "\nEscolha a linha do tabuleiro que deseja jogar a carta (de 1 a 3): "
+                    );
+                    i = scann.nextInt();
 
-                System.out.print(
-                "\nEscolha a coluna do tabuleiro que deseja jogar a carta (de 1 a 3): "
-                );
-                j = scann.nextInt();
+                    System.out.print(
+                    "\nEscolha a coluna do tabuleiro que deseja jogar a carta (de 1 a 3): "
+                    );
+                    j = scann.nextInt();
 
-                try {
-                    quantPontosFeitos = tabuleiro.addCarta(i-1, j-1, jogador2.jogarCarta(index-1));
+                    try {
 
-                    jogador2.setPontos(quantPontosFeitos);
-                    jogador1.setPontos(quantPontosFeitos * (-1));
-                } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                        tabuleiro.testeAddCarta(i-1, j-1);
+                        quantPontosFeitos = tabuleiro.addCarta(i-1, j-1, jogador2.jogarCarta(index-1));
+                        jogador2.setPontos(quantPontosFeitos);
+                        jogador1.setPontos(quantPontosFeitos * (-1));
+                        controle++;
+
+                    } catch (Exception e) {
+                        System.out.println("Erro: " + e.getMessage());
+                        tabuleiro.mostrarTabuleiro();
+                    }
                 }
             }
 
@@ -108,15 +126,16 @@ public final class Jogo {
             scann.nextLine();
 
             jogadorDaVez++;
+            System.out.println("\n\n\n\n");            
         }
 
         tabuleiro.mostrarTabuleiro();
 
         System.out.println("O jogo acabou");
         System.out.println();
-        System.out.println("----- Pontução -----");
-        System.out.println("Jogador 1 - " + jogador1.getPontos() + " pontos");
-        System.out.println("Jogador 2 - " + jogador2.getPontos() + " pontos");
+        System.out.println("\"\\t\\t      "+white+"----- Pontução -----"+reset);
+        System.out.println("\t\t       Jogador 1: "+white+ jogador1.getPontos() + " pontos"+reset);
+        System.out.println("\t\t       Jogador 2: "+white+ jogador2.getPontos() + " pontos\n\n"+reset);
         System.out.println();
         System.out.println("Resultado final - " + this.getVencedor());
     }
