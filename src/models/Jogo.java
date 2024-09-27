@@ -7,6 +7,8 @@ public final class Jogo {
     private Jogador jogador1;
     private Jogador jogador2;
     private Tabuleiro tabuleiro;
+    private Carta cartaAux;
+    private int cartaRemovidaJogador1 = 0, cartaRemovidaJogador2 = 0;
 
     private static String reset = "\u001b[0m";
     private static String white = "\u001b[37;1m";
@@ -33,7 +35,6 @@ public final class Jogo {
     public void iniciarJogo() {
         int jogadorDaVez = this.sortearJogador();
         int index, i, j, quantPontosFeitos, controle;
-
         while (tabuleiro.getQuantCartasJogadas() < 9) {
             controle = 0;
             System.out.println();
@@ -70,11 +71,13 @@ public final class Jogo {
                     try {
 
                         tabuleiro.testeAddCarta(i-1, j-1);
-                        quantPontosFeitos = tabuleiro.addCarta(i-1, j-1, jogador1.jogarCarta(index-1));
+                        cartaAux = jogador1.jogarCarta(index-1);
+                        quantPontosFeitos = tabuleiro.addCarta(i-1, j-1, cartaAux);
                         jogador1.setPontos(quantPontosFeitos);
                         jogador2.setPontos(quantPontosFeitos * (-1));
                         controle++;    
-
+                        cartaRemovidaJogador1 += jogador1.getCartaJogada(cartaAux);
+                        jogador1.setMapCartaJogada(cartaRemovidaJogador1);
                     } catch (Exception e) {
                         System.out.println("Erro: " + e.getMessage());
                         tabuleiro.mostrarTabuleiro();
@@ -108,11 +111,13 @@ public final class Jogo {
                     try {
 
                         tabuleiro.testeAddCarta(i-1, j-1);
-                        quantPontosFeitos = tabuleiro.addCarta(i-1, j-1, jogador2.jogarCarta(index-1));
+                        cartaAux = jogador2.jogarCarta(index-1);
+                        quantPontosFeitos = tabuleiro.addCarta(i-1, j-1, cartaAux);
                         jogador2.setPontos(quantPontosFeitos);
                         jogador1.setPontos(quantPontosFeitos * (-1));
                         controle++;
-
+                        cartaRemovidaJogador2 += jogador2.getCartaJogada(cartaAux);
+                        jogador2.setMapCartaJogada(cartaRemovidaJogador2);
                     } catch (Exception e) {
                         System.out.println("Erro: " + e.getMessage());
                         tabuleiro.mostrarTabuleiro();
@@ -133,7 +138,7 @@ public final class Jogo {
 
         System.out.println("O jogo acabou");
         System.out.println();
-        System.out.println("\"\\t\\t      "+white+"----- Pontução -----"+reset);
+        System.out.println("\t\t      "+white+"----- Pontução -----"+reset);
         System.out.println("\t\t       Jogador 1: "+white+ jogador1.getPontos() + " pontos"+reset);
         System.out.println("\t\t       Jogador 2: "+white+ jogador2.getPontos() + " pontos\n\n"+reset);
         System.out.println();
@@ -157,5 +162,6 @@ public final class Jogo {
     public Jogador getJogador2() {
         return jogador2;
     }
+    
     
 }

@@ -32,7 +32,7 @@ public final class CartaAux {
                     baixo = Integer.parseInt(valores[2].replaceAll("[^0-9]", ""));
                     direita = Integer.parseInt(valores[3].replaceAll("[^0-9]", ""));
 
-                    cartas.add(new Carta(cima, esquerda, baixo, direita, null));
+                    cartas.add(new Carta(cima, esquerda, baixo, direita, null, -1));
                 }
             }
 

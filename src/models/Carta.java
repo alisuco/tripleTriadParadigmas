@@ -5,14 +5,16 @@ public class Carta {
     private int esquerda;
     private int baixo;
     private int direita;
+    private int indice;
     private Jogador dono;
 
-    public Carta(int cima, int esquerda, int baixo, int direita, Jogador dono) {
+    public Carta(int cima, int esquerda, int baixo, int direita, Jogador dono, int indice) {
         this.cima = cima;
         this.esquerda = esquerda;
         this.baixo = baixo;
         this.direita = direita;
         this.dono = dono;
+        this.indice = indice;
     }
 
 
@@ -38,5 +40,13 @@ public class Carta {
     
     public Jogador getDono() {
         return dono;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
     }
 }

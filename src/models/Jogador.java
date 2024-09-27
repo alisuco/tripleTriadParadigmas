@@ -11,6 +11,7 @@ public class Jogador {
     private List<Carta> cartas;
     private String nome;
     private int pontos;
+    private int mapCartaJogada;
     Scanner scann = new Scanner(System.in);
 
     public Jogador(String nome) {
@@ -22,7 +23,7 @@ public class Jogador {
         for (int i = 0; i < 5; i++) {
             carta = Monte.pegarCarta();
             carta.setDono(this);
-
+            carta.setIndice(i+1);
             cartas.add(carta);
         }
     }
@@ -36,6 +37,13 @@ public class Jogador {
                 return red;
             }
         }
+    }
+
+    public int getCartaJogada(Carta cartaRemovida) {
+        if ( cartaRemovida.getIndice() == 5 || cartaRemovida.getIndice() == 4) {
+            return 1;
+        }
+        return 0;
     }
 
     public void mostrarCartas() {
@@ -80,11 +88,22 @@ public class Jogador {
                 break;
         
             case 4:
-                System.out.println("\n"+cor()+"+-----+ +-----+ +-----+ +-----+\n" +
-                "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  | |  " + valoresFormatados[8] + "  | |><><>|\n" +
-                "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "| |"+ valoresFormatados[9] + "   " + valoresFormatados[10] + "| |<><><|\n" +
-                "|  " + valoresFormatados[3] + "  | |  " + valoresFormatados[7] + "  | |  " + valoresFormatados[11] + "  | |><><>|\n" +
-                "+-----+ +-----+ +-----+ +-----+"+reset+"\n");
+            
+                if (this.mapCartaJogada == 1) {
+                    System.out.println("\n"+cor()+"+-----+ +-----+ +-----+ +-----+\n" +
+                    "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  | |  " + valoresFormatados[8] + "  | |><><>|\n" +
+                    "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "| |"+ valoresFormatados[9] + "   " + valoresFormatados[10] + "| |<><><|\n" +
+                    "|  " + valoresFormatados[3] + "  | |  " + valoresFormatados[7] + "  | |  " + valoresFormatados[11] + "  | |><><>|\n" +
+                    "+-----+ +-----+ +-----+ +-----+"+reset+"\n");                    
+                }
+                
+                if (this.mapCartaJogada == 0) {
+                    System.out.println("\n"+cor()+"+-----+ +-----+ +-----+ +-----+\n" +
+                    "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  | |><><>| |><><>|\n" +
+                    "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "| |><><>| |<><><|\n" +
+                    "|  " + valoresFormatados[3] + "  | |  " + valoresFormatados[7] + "  | |><><>| |><><>|\n" +
+                    "+-----+ +-----+ +-----+ +-----+"+reset+"\n");                  
+                }                    
                 
                 System.out.println("\nPressione" +red+ " ENTER " +reset+ "para mostrar suas cartas.");
                 controle = scann.nextLine();
@@ -97,6 +116,28 @@ public class Jogador {
                 break;
         
             case 3:
+                if (this.mapCartaJogada < 2) { 
+
+                    if (this.mapCartaJogada == 1) {
+                        System.out.println("\n"+cor()+"+-----+ +-----+ +-----+\n" +
+                        "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  | |><><>|\n" +
+                        "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "| |><><>|\n" +
+                        "|  " + valoresFormatados[3] + "  | |  " + valoresFormatados[7] + "  | |><><>|\n" +
+                        "+-----+ +-----+ +-----+"+reset+"\n");
+                    }    
+
+                    if (this.mapCartaJogada == 0) {
+                        System.out.println("\n"+cor()+"+-----+ +-----+ +-----+\n" +
+                        "|  " + valoresFormatados[0] + "  | |><><>| |><><>|\n" +
+                        "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |><><>| |<><><|\n" +
+                        "|  " + valoresFormatados[3] + "  | |><><>| |><><>|\n" +
+                        "+-----+ +-----+ +-----+"+reset+"\n");
+                    }
+
+                    System.out.println("\nPressione" +red+ " ENTER " +reset+ "para mostrar suas cartas.");
+                    controle = scann.nextLine();
+                }
+                
                 System.out.println("\n"+cor()+"+-----+ +-----+ +-----+\n" +
                 "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  | |  " + valoresFormatados[8] + "  |\n" +
                 "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "| |"+ valoresFormatados[9] + "   " + valoresFormatados[10] + "|\n" +
@@ -105,6 +146,28 @@ public class Jogador {
                 break;
         
             case 2:
+                if (this.mapCartaJogada < 2) { 
+
+                    if (this.mapCartaJogada == 1) {
+                        System.out.println("\n"+cor()+"+-----+ +-----+\n" +
+                        "|  " + valoresFormatados[0] + "  | |><><>|\n" +
+                        "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |><><>|\n" +
+                        "|  " + valoresFormatados[3] + "  | |><><>|\n" +
+                        "+-----+ +-----+"+reset+"\n");
+                    }    
+
+                    if (this.mapCartaJogada == 0) {
+                        System.out.println("\n"+cor()+"+-----+ +-----+\n" +
+                        "|><><>| |><><>|\n" +
+                        "|><><>| |<><><|\n" +
+                        "|><><>| |><><>|\n" +
+                        "+-----+ +-----+"+reset+"\n");
+                    }
+                    
+                    System.out.println("\nPressione" +red+ " ENTER " +reset+ "para mostrar suas cartas.");
+                    controle = scann.nextLine();
+                }
+
                 System.out.println("\n"+cor()+"+-----+ +-----+\n" +
                 "|  " + valoresFormatados[0] + "  | |  " + valoresFormatados[4] + "  |\n" +
                 "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "| |"+ valoresFormatados[5] + "   " + valoresFormatados[6] + "|\n" +
@@ -113,6 +176,18 @@ public class Jogador {
                 break;
         
             case 1:
+                if (this.mapCartaJogada < 2) { 
+
+                    System.out.println("\n"+cor()+"+-----+\n" +
+                    "|><><>|\n" +
+                    "|><><>|\n" +
+                    "|><><>|\n" +
+                    "+-----+"+reset+"\n");
+                    
+                    System.out.println("\nPressione" +red+ " ENTER " +reset+ "para mostrar suas cartas.");
+                    controle = scann.nextLine();
+                }
+
                 System.out.println("\n"+cor()+"+-----+\n" +
                 "|  " + valoresFormatados[0] + "  |\n" +
                 "|"+ valoresFormatados[1] + "   " + valoresFormatados[2] + "|\n" +
@@ -148,6 +223,10 @@ public class Jogador {
 
     public String getNome() {
         return nome;
+    }
+    
+    public void setMapCartaJogada(int cartaJogada) {
+        this.mapCartaJogada = cartaJogada;
     }
     
 }
