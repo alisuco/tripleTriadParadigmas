@@ -41,7 +41,7 @@ public final class Jogo {
             tabuleiro.mostrarTabuleiro();
 
             System.out.println();
-            System.out.println("                      "+white+"----- Pontução -----"+reset);
+            System.out.println("                      "+white+"----- Pontuação -----"+reset);
             System.out.println("\t\t       Jogador 1: "+white+ jogador1.getPontos() + " pontos"+reset);
             System.out.println("\t\t       Jogador 2: "+white+ jogador2.getPontos() + " pontos\n\n"+reset);
             
@@ -138,7 +138,7 @@ public final class Jogo {
 
         System.out.println("O jogo acabou");
         System.out.println();
-        System.out.println("\t\t      "+white+"----- Pontução -----"+reset);
+        System.out.println("\t\t      "+white+"----- Pontuação -----"+reset);
         System.out.println("\t\t       Jogador 1: "+white+ jogador1.getPontos() + " pontos"+reset);
         System.out.println("\t\t       Jogador 2: "+white+ jogador2.getPontos() + " pontos\n\n"+reset);
         System.out.println();
